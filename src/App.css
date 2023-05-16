@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+body, html {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #C4DFDF;
+}
+body{
+  width: 80%;
+}
+#root {
+  background-color: #F8F6F4;
+  width: 80%;
+  height: auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.flexbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* all about inputs */
+.inputs{
+  display: flex;
+  justify-content: stretch;
+  width: 100%;
+  align-items: stretch;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* all about search elements */
+
+.search{
+  width: 85%;
+}
+.searchItem{
+  width: 93%;
+  height: 35px;
+}
+.searchButton {
+  height: 40px;
+  width: 40px;
+  color: #1B9C85;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+/* all about add elements */
+.add {
+  width: 20%;
+}
+
+.addButton{
+  width: 100%;
+  height: 40px;
+}
+
+.addMedicines{
+  /* display: none; */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addMedicines-contents{
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.inputForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
+.inputOfAddMedicine{
+  margin: 10px;
+  height: 20px;
+  background-color: #C4DFDF;
 
-.App-link {
-  color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.description {
+  height: 200px;
 }
