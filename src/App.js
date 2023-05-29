@@ -2,13 +2,64 @@
 import './App.css';
 import Inputs from './components/Inputs';
 import Header from './components/Header';
+import MedicineData from './components/MedicineData';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
 function App() {
+  const [medicineArray, setMedicineArray] = useState([]);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState(0);
+
+
+  useEffect(() => {
+    const fetchMedicine = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/');
+
+            const data = response.data
+            setMedicineArray(data);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    fetchMedicine();
+},[]);
+
+let obj = {
+  name: undefined,
+  description: undefined,
+  quantity: undefined
+}
+
+var medicineArray2 = [];
+const handleSubmit = (event) => {
+  // event.preventDefault();
+  obj = {
+      name: name,
+      description: description,
+      quantity: quantity
+  }
+
+  axios
+  .post('/', obj)
+  .then((response) => {
+      medicineArray2 = [...medicineArray, response.data];
+      setMedicineArray(medicineArray2);
+  })
+  .catch((error) => {
+      console.error('Error adding medicine:', error);
+  });
+  setName("");
+}
+
   return (
     <div className="App">
       <Header />
-      <Inputs />
-      
+      <Inputs handleSubmit={handleSubmit} medicineArray={medicineArray} updateArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
+      <MedicineData medicineArray={medicineArray} updatedArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
     </div>
   );
 }
