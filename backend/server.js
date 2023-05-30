@@ -113,6 +113,23 @@ mongoose.connect('mongodb://localhost:27017/medicineDatabase', {
     });
   });
 
+  app.delete('/:id', (req, res) => {
+    const {id} = req.params;
+    
+    Medicine.findByIdAndDelete(id)
+    .then(deletedMedicine => {
+      if (!deletedMedicine) {
+        // If the medicine with the provided ID doesn't exist
+        return res.status(404).json({ message: 'Medicine not found' });
+      }
+
+      res.json({ message: 'Medicine deleted successfully' });
+    })
+    .catch(error => {
+      console.error('Error deleting medicine:', error);
+      res.status(500).send('Internal Server Error');
+    });
+  });
 
 
 

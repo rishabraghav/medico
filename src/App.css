@@ -124,7 +124,8 @@ body{
   background-color: #C4DFDF;
   border-radius: 4px;
   color: #08374c;
-
+  cursor: pointer;
+  width: 80%;
 }
 .description {
   height: 200px;
@@ -153,10 +154,20 @@ body{
 .animated-div:hover {
   transform: scale(1.05);
 }
-
-.hidden {
-  visibility: hidden;
-}
-.show{
-  visibility: visible !important;
-}
+ .deleteButton{
+  
+  background-color: #CD1818;
+  color: white;
+  cursor: pointer;
+  width: 75%;
+  margin-left: 9%;
+ }
+ .deleteButton:hover{
+  background-color: #CE5959; 
+ }
+ .inputFormButton{
+  width: 80%;
+ }
+ .inputFormButton:hover{
+  background-color: #A4D0A4;
+ }
