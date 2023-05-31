@@ -18,7 +18,7 @@ app.use(cors({
 //MONGOOSE AND MODELS
 
 
-mongoose.connect('mongodb://localhost:27017/medicineDatabase', {
+mongoose.connect('mongodb+srv://rishabhraghav2012:7aaADi8dOiwTrpc1@medico.yih80di.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     // useUnifiedTopolody: true
 }).then(() => {
