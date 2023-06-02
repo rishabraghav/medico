@@ -19,6 +19,7 @@ function App() {
             const response = await axios.get('https://medico-backend.cyclic.app/');
 
             const data = response.data
+            // console.log(data);
             setMedicineArray(data);
 
         } catch (error) {
