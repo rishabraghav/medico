@@ -25,7 +25,7 @@ const MedicineData = ({handleSubmit, medicineArray, updatedArray, name, setName,
 
    const handleDelete = () => {
     console.log("delete button pressed : ID is = ", id);
-    axios.delete(`/${id}`)
+    axios.delete(`https://medico-backend.cyclic.app/${id}`)
     .then((response) => {
         console.log(response.message);
    })
