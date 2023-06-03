@@ -33,7 +33,7 @@ const MedicineData = ({handleSubmit, medicineArray, updatedArray, name, setName,
       console.error("error deleting medicine", error);
     }
     
-    // window.location.reload();
+    window.location.reload();
   };
 
     return(
