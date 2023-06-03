@@ -45,7 +45,7 @@ const handleSubmit = (event) => {
   }
 
   axios
-  .post('https://medico-backend.cyclic.app/', obj)
+  .post('https://medico-backend.cyclic.app/add', obj)
   .then((response) => {
       medicineArray2 = [...medicineArray, response.data];
       setMedicineArray(medicineArray2);
