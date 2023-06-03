@@ -23,18 +23,18 @@ const MedicineData = ({handleSubmit, medicineArray, updatedArray, name, setName,
 
    }
 
-   const handleDelete = () => {
-    console.log("delete button pressed : ID is = ", id);
-    axios.delete(`https://medico-backend.cyclic.app/${id}`)
-    .then((response) => {
-        console.log(response.message);
-   })
-   .catch((error) => {
-    console.error("error deleting medicine", error);
-   });
-
-//    window.location.reload();
-   }
+   const handleDelete = async () => {
+    console.log("delete button pressed : ID is =", id);
+    
+    try {
+      const response = await axios.delete(`https://medico-backend.cyclic.app/${id}`);
+      console.log(response.message);
+    } catch (error) {
+      console.error("error deleting medicine", error);
+    }
+    
+    // window.location.reload();
+  };
 
     return(
         <div className="medicineData">
