@@ -37,7 +37,7 @@ let obj = {
 
 var medicineArray2 = [];
 const handleSubmit = (event) => {
-  // event.preventDefault();
+  event.preventDefault();
   obj = {
       name: name,
       description: description,
