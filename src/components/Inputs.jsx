@@ -1,7 +1,7 @@
-import React, {useRef, useState} from "react";
+import React, {useRef} from "react";
 
 
-const Inputs = ({handleSubmit, medicineArray, updateArray, name, setName, description, setDescription, quantity, setQuantity}) => {
+const Inputs = ({isOpen, open, close, handleSubmit, medicineArray, updateArray, name, setName, description, setDescription, quantity, setQuantity}) => {
     
     const searchInputRef = useRef(null);
 
