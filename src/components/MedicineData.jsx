@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import {medicineArray} from './Inputs';
 // import axios from "axios";
 
-const MedicineData = ({handleSubmit, medicineArray, updatedArray, name, setName, description, setDescription, quantity, setQuantity}) => {
+const MedicineData = ({handleSubmit, medicineArray, name, setName, description, setDescription, quantity, setQuantity}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [id, setId] = useState('');
 
@@ -13,6 +13,13 @@ const MedicineData = ({handleSubmit, medicineArray, updatedArray, name, setName,
     const close = () => {
         setIsOpen(false);
     }
+    useEffect(() => {
+        // Your logic to handle the component rendering when `medicineArray` changes
+        // You can place the code you want to execute when `medicineArray` changes
+        // For example, you can update some UI elements or trigger a re-render of child components
+        // Here's a simple example where we log the updated `medicineArray`
+        // console.log('medicineArray has changed:', medicineArray);
+      }, [medicineArray]);
 
     const handleClick = (name, description, quantity, _id) => {
         setName(name);
@@ -23,17 +30,33 @@ const MedicineData = ({handleSubmit, medicineArray, updatedArray, name, setName,
 
    }
 
-   const handleDelete = async () => {
+//    const handleDelete = async () => {
+//     console.log("delete button pressed : ID is =", id);
+    
+//     try {
+//       const response = await axios.delete(`https://medico-backend.cyclic.app/${id}`);
+//       console.log(response.message);
+//     } catch (error) {
+//       console.error("error deleting medicine", error);
+//     }
+    
+//     window.location.reload();
+//   };
+const handleDelete = async () => {
     console.log("delete button pressed : ID is =", id);
-    
-    try {
-      const response = await axios.delete(`https://medico-backend.cyclic.app/${id}`);
-      console.log(response.message);
-    } catch (error) {
-      console.error("error deleting medicine", error);
+  
+    const confirmDelete = window.confirm("Are you sure you want to delete this medicine?");
+  
+    if (confirmDelete) {
+      try {
+        const response = await axios.delete(`https://medico-backend.cyclic.app/${id}`);
+        console.log(response.message);
+      } catch (error) {
+        console.error("error deleting medicine", error);
+      }
+  
+      window.location.reload();
     }
-    
-    window.location.reload();
   };
 
     return(

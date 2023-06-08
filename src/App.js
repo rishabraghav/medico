@@ -12,6 +12,7 @@ function App() {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [fetchedMedicineArray, setFetchedMedicineArray] = useState([]);
 
   const open = () => {
       setIsOpen(true);
@@ -25,7 +26,7 @@ function App() {
             const response = await axios.get('https://medico-backend.cyclic.app/');
 
             const data = response.data
-            console.log(data);
+            // console.log(data);
             setMedicineArray(data);
 
         } catch (error) {
@@ -33,34 +34,38 @@ function App() {
         }
     };
     fetchMedicine();
-},[]);
+    console.log("very first render");
+},[fetchedMedicineArray]);
 
-let obj = {
-  name: undefined,
-  description: undefined,
-  quantity: undefined
-}
 
-var medicineArray2 = [];
+
 const handleSubmit = (event) => {
   event.preventDefault();
-  obj = {
-      name: name,
-      description: description,
-      quantity: quantity
-  }
+  const newMedicine = {
+    name: name,
+    description: description,
+    quantity: quantity
+  };
 
   axios
-  .post('https://medico-backend.cyclic.app/add', obj)
-  .then((response) => {
-      medicineArray2 = [...medicineArray, response.data];
-      setMedicineArray(medicineArray2);
-  })
-  .catch((error) => {
-      console.error('Error adding medicine:', error);
-  });
-  close();
-}
+    .post('https://medico-backend.cyclic.app/add', newMedicine)
+    .then((response) => {
+      const updatedMedicineArray = medicineArray.map((medicine) => {
+        if (medicine._id === response.data._id) {
+          // Update the existing medicine object with the new data
+          return response.data;
+        }
+        return medicine; // Keep other medicines unchanged
+      });
+      setFetchedMedicineArray(updatedMedicineArray);
+      setMedicineArray(updatedMedicineArray);
+      
+    })
+    .catch((error) => {
+      console.error('Error adding/updating medicine:', error);
+    });
+    close();
+};
 
   return (
     <div className="App">
