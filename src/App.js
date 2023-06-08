@@ -11,8 +11,14 @@ function App() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
-
+  const open = () => {
+      setIsOpen(true);
+  }
+  const close = () => {
+      setIsOpen(false);
+  }
   useEffect(() => {
     const fetchMedicine = async () => {
         try {
@@ -53,13 +59,13 @@ const handleSubmit = (event) => {
   .catch((error) => {
       console.error('Error adding medicine:', error);
   });
-  setName("");
+  close();
 }
 
   return (
     <div className="App">
       <Header />
-      <Inputs handleSubmit={handleSubmit} medicineArray={medicineArray} updateArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
+      <Inputs open={open} close={close} handleSubmit={handleSubmit} medicineArray={medicineArray} updateArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
       <MedicineData handleSubmit={handleSubmit} medicineArray={medicineArray} updatedArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
     </div>
   );

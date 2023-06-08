@@ -2,15 +2,10 @@ import React, {useRef, useState} from "react";
 
 
 const Inputs = ({handleSubmit, medicineArray, updateArray, name, setName, description, setDescription, quantity, setQuantity}) => {
-    const [isOpen, setIsOpen] = useState(false);
+    
     const searchInputRef = useRef(null);
 
-    const open = () => {
-        setIsOpen(true);
-    }
-    const close = () => {
-        setIsOpen(false);
-    }
+    
 
     const handleSearch = (event) => {
             const searchText = searchInputRef.current.value;
