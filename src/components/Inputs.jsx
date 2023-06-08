@@ -27,7 +27,7 @@ const Inputs = ({handleSubmit, medicineArray, updateArray, name, setName, descri
         <div className='inputs'>
             <div className='search flexbox'>
             <input className='searchItem' type='search' ref={searchInputRef} placeholder='Find medicine' />
-            <button className='searchButton' onClick={handleSearch}><img style={{height:"22px", width:"22px"}} src="https://img.icons8.com/?size=512&id=21101&format=png" alt="search-img"></img></button>
+            <button className='searchButton flexbox' onClick={handleSearch}><img style={{height:"22px", width:"22px"}} src="https://img.icons8.com/?size=512&id=21101&format=png" alt="search-img"></img></button>
             </div>
             <div className='add'>
             <button className='addButton flexbox' onClick={open} type='submit' >Add Medicine  <img width="20" height="20" src="https://img.icons8.com/ultraviolet/40/pill.png" alt="pill"/></button>

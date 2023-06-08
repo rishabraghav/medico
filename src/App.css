@@ -65,6 +65,9 @@ body{
   cursor: pointer;
   color: #146C94;
   text-transform: uppercase;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 3px;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -184,11 +187,18 @@ body{
   }
   .addButton{
     font-size: 10px;
+    text-transform: none;
   }
+  
  }
 
  @media (max-width: 480px) { 
   .addButton{
     font-size: 6px;
+
+  }
+  .addButton img {
+    width: 10px;
+    height: 10px;
   }
  }
