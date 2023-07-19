@@ -49,13 +49,13 @@ const handleDelete = async () => {
   
     if (confirmDelete) {
       try {
-        const response = await axios.delete(`https://medico-backend.cyclic.app/${id}`);
+        const response = await axios.delete(`http://localhost:3001/medicine/${id}`);
         console.log(response.message);
       } catch (error) {
         console.error("error deleting medicine", error);
       }
   
-      window.location.reload();
+    //   window.location.reload();
     }
   };
 
