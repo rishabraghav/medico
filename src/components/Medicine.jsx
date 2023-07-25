@@ -72,7 +72,7 @@ return (
     <div className="App">
       <Header />
       <Inputs isOpen={isOpen} open={open} close={close} handleSubmit={handleSubmit} medicineArray={medicineArray} updateArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
-      <MedicineData handleSubmit={handleSubmit} medicineArray={medicineArray} updatedArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
+      <MedicineData setFetchedMedicineArray={setFetchedMedicineArray} handleSubmit={handleSubmit} medicineArray={medicineArray} updatedArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
     </div>
   );
 }

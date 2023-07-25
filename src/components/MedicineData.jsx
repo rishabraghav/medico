@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import {medicineArray} from './Inputs';
 // import axios from "axios";
 
-const MedicineData = ({handleSubmit, medicineArray, name, setName, description, setDescription, quantity, setQuantity}) => {
+const MedicineData = ({setFetchedMedicineArray, handleSubmit, medicineArray, name, setName, description, setDescription, quantity, setQuantity}) => {
     const [isOpen, setIsOpen] = useState(false);
     const [id, setId] = useState('');
 
@@ -30,18 +30,6 @@ const MedicineData = ({handleSubmit, medicineArray, name, setName, description, 
 
    }
 
-//    const handleDelete = async () => {
-//     console.log("delete button pressed : ID is =", id);
-    
-//     try {
-//       const response = await axios.delete(`https://medico-backend.cyclic.app/${id}`);
-//       console.log(response.message);
-//     } catch (error) {
-//       console.error("error deleting medicine", error);
-//     }
-    
-//     window.location.reload();
-//   };
 const handleDelete = async () => {
     console.log("delete button pressed : ID is =", id);
   
@@ -51,11 +39,11 @@ const handleDelete = async () => {
       try {
         const response = await axios.delete(`http://localhost:3001/medicine/${id}`);
         console.log(response.message);
+        setFetchedMedicineArray(medicineArray);
+        close();
       } catch (error) {
         console.error("error deleting medicine", error);
       }
-  
-    //   window.location.reload();
     }
   };
 
@@ -68,9 +56,9 @@ const handleDelete = async () => {
             </div>
             {medicineArray.map((medicine) => (
                 <div className="medicineData-contents animated-div" onClick={() => handleClick(medicine.name, medicine.description, medicine.quantity, medicine._id)} key={medicine._id}>
-                    <h4 style={{textTransform:"uppercase", fontFamily:"serif", width:"40%"}}>{medicine.name}</h4>
-                    <p style={{display:"flex", justifyContent:"flex-start", width:"50%"}}>{medicine.description}</p>
-                    <h4 style={{display:"flex", justifyContent:"flex-end",width:"20%"}}>{medicine.quantity}</h4>
+                    <h4 className="floatLeft" style={{textTransform:"uppercase", fontFamily:"serif", width:"40%"}}>{medicine.name}</h4>
+                    <p className="floatLeft" style={{display:"flex", justifyContent:"flex-start", width:"50%"}}>{medicine.description}</p>
+                    <h4 className="floatLeft" style={{display:"flex", justifyContent:"flex-end",width:"20%"}}>{medicine.quantity}</h4>
                 </div>
             ))}
             {isOpen && (

@@ -8,18 +8,20 @@ import generateID from "./patientsArray";
 
 
 
+
 const Patient = () => {
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [sex, setSex] = useState('');
     const [address, setAddress] = useState('');
-    const [contact, setContact] = useState('');
+    const [contact, setContact] = useState();
     const [symptoms, setSymptoms] = useState('');
     const [tests, setTests] = useState('');
     const [medicineSuggested, setMedicineSuggested] = useState('');
 
     const [patientsArray, setPatientsArray] = useState([]);
-
+    const [tempArray, setTempArray] = useState([]);
+    // const [tempArray, setTempArray] = useState();
 
     function generateDate() {
         const currentDate = new Date();
@@ -31,60 +33,69 @@ const Patient = () => {
         const seconds = currentDate.getSeconds().toString().padStart(2, '0');
         return `${year}/${month}/${date} - ${hours}:${minutes}:${seconds}`;
       }
+   
 
     useEffect(() => {
-        // console.log(patientsArray);
-    }, [patientsArray]);
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        
-        const existing = patientsArray.find((item) => item.contact === contact);
-
-        if(existing) {
-            existing.Info.push({
-                Date: generateDate(),
-                symptoms: symptoms,
-                tests: tests,
-                medicineSuggested: medicineSuggested
-            });
-
-        } else {
-            const newPatient = {
-                Uhid: generateID(),
-                name: name,
-                age: age,
-                sex: sex,
-                address: address,
-                contact: contact,
-                Info: [
-                    {
-                        Date: generateDate(),
-                        symptoms: symptoms,
-                        tests: tests,
-                        medicineSuggested: medicineSuggested
-                    }
-                ]
+        const fetchPatients = async() => {
+            try{
+                const response = await axios.get("http://localhost:3001/patients/");
+                console.log("Fetched Patients: ", response.data);
+                setPatientsArray(response.data);
+            } catch(err) {
+                console.error("error in fetching patients: " , err);
             }
-            const newArray = [...patientsArray, newPatient]
-            setPatientsArray(newArray);
-
         }
 
-        axios.post("http://localhost:3001/patients/add", patientsArray)
-        .then( (response) => {
-            console.log("successfully sent: ", response);
-            console.log("data: ", response.data);
-        }).catch((error) => {
-            console.error("error getting the patients: ", error);
-        });
+        fetchPatients();
+    }, [tempArray]);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const confirm = window.confirm("Are all the details correct?");
+        if (confirm) {
+            let data;
+            const existingPatient = patientsArray.find((item) => item.contact === contact);
+            if (existingPatient) {
+                existingPatient.Info.push({
+                    date: generateDate(),
+                    symptoms: symptoms,
+                    tests: tests,
+                    medicineSuggested: medicineSuggested
+                });
+                data = existingPatient;
+            } else {
+                data = {
+                    Uhid: generateID(),
+                    name: name,
+                    age: age,
+                    sex: sex,
+                    address: address,
+                    contact: contact,
+                    Info: [{
+                        date: generateDate(),
+                        symptoms: symptoms,
+                        tests: tests,
+                        medicineSuggested: medicineSuggested,
+                    },
+                    ]
+                }
+                setPatientsArray([...patientsArray, data]);
+                setTempArray([[...patientsArray, data]]);
+            }
+            try {
+                const response = await axios.post("http://localhost:3001/patients/add", data);
+                console.log(response.data);
+            } catch (err) {
+                console.error("error in making POST request: ", err);
+            }
+        }
     }
 
     return (
         <div className="patient">
             <Header />
             <PatientInput handleSubmit={handleSubmit} setName={setName} setAge={setAge} setSex={setSex} setAddress={setAddress} setContact={setContact} setSymptoms={setSymptoms} setTests={setTests} setMedicineSuggested={setMedicineSuggested}/>
-            <PatientsRecord patientsArray={patientsArray} setPatientsArray={setPatientsArray} name={name} age={age} sex={sex} address={address} contact={contact} symptoms={symptoms} tests={tests} medicineSuggested={medicineSuggested}/>
+            <PatientsRecord setTempArray={setTempArray} patientsArray={patientsArray} setPatientsArray={setPatientsArray} name={name} age={age} sex={sex} address={address} contact={contact} symptoms={symptoms} tests={tests} medicineSuggested={medicineSuggested}/>
         </div>
     );
 }

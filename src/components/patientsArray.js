@@ -1,5 +1,5 @@
 
-function generateID() {
+ function generateID() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
@@ -12,7 +12,6 @@ function generateID() {
 
 
 export default generateID;
-
 
 
 // const Array = [{
