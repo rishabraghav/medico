@@ -180,14 +180,14 @@ body{
 .deletePatient{
   float: right;
   border: 0px;
-  background-color: #ECF8F9;
+  background-color: #C5DFF8;
   width: 25px;
   height: 25px;
   border-radius: 50%;
   cursor: pointer;
 }
 .deletePatient:hover {
-  background-color: #C5DFF8;
+  background-color: #ECF8F9;
 }
 
 .deletePatientImg{
