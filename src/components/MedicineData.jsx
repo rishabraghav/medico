@@ -54,13 +54,15 @@ const handleDelete = async () => {
                 <h5 style={{display:"flex", justifyContent:"flex-start", width:"50%", textTransform:"uppercase"}}>Description</h5>
                 <h5 style={{display:"flex", justifyContent:"flex-end",width:"20%", textTransform:"uppercase"}}>Quantity</h5>
             </div>
+            <div className="columnReverse">
             {medicineArray.map((medicine) => (
                 <div className="medicineData-contents animated-div" onClick={() => handleClick(medicine.name, medicine.description, medicine.quantity, medicine._id)} key={medicine._id}>
-                    <h4 className="floatLeft" style={{textTransform:"uppercase", fontFamily:"serif", width:"40%"}}>{medicine.name}</h4>
+                    <h4 className="medicineName floatLeft" style={{textTransform:"uppercase", fontFamily:"serif", width:"40%"}}>{medicine.name}</h4>
                     <p className="floatLeft" style={{display:"flex", justifyContent:"flex-start", width:"50%"}}>{medicine.description}</p>
                     <h4 className="floatLeft" style={{display:"flex", justifyContent:"flex-end",width:"20%"}}>{medicine.quantity}</h4>
                 </div>
             ))}
+            </div>
             {isOpen && (
                 <div className="addMedicines" >
                 <div id="updateMedicine" className="addMedicines-Contents">

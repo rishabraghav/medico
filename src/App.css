@@ -140,8 +140,8 @@ body{
   margin-top: 50px;
   padding: 20px;
   background-color: #D2E9E9;
-  display: flex;
-  flex-direction: column-reverse;
+  /* display: flex; */
+  /* flex-direction: column-reverse; */
 }
 .medicineData-contents{
   display: flex;
@@ -150,6 +150,10 @@ body{
 .medicineData-headings{
   display: flex;
   justify-content: space-between;
+}
+
+.medicineName{
+  color: rgb(20, 108, 148);
 }
 
 .animated-div {
@@ -251,6 +255,9 @@ span{
     display: flex;
     flex-direction: column;
   }
+  .medicineData-headings{
+    visibility: hidden;
+  }
   .search{
     display: flex;
     flex-direction: column;
@@ -285,7 +292,26 @@ span{
     width: 10px;
     height: 10px;
   }
-  .medicineData-headings{
-    visibility: hidden;
-  }
  }
+
+ .navigations{
+  justify-content: space-between;
+ }
+
+ .cute-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #bfdfdf; /* Pink background color */
+  /* color: rgb(20, 108, 148);  */
+  color: white;
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Add hover effect */
+.cute-button:hover {
+  background-color: #FFA07A; /* Lighter shade of pink on hover */
+}
