@@ -3,16 +3,10 @@ import React, { useState, useEffect } from "react";
 // import {medicineArray} from './Inputs';
 // import axios from "axios";
 
-const MedicineData = ({setFetchedMedicineArray, handleSubmit, medicineArray, name, setName, description, setDescription, quantity, setQuantity}) => {
-    const [isOpen, setIsOpen] = useState(false);
+const MedicineData = ({isOpenForUpdate, openForUpdate, closeForUpdate, setFetchedMedicineArray, handleSubmit, medicineArray, name, setName, description, setDescription, quantity, setQuantity}) => {
+
     const [id, setId] = useState('');
 
-    const open = () => {
-        setIsOpen(true);
-    }
-    const close = () => {
-        setIsOpen(false);
-    }
     useEffect(() => {
         // Your logic to handle the component rendering when `medicineArray` changes
         // You can place the code you want to execute when `medicineArray` changes
@@ -26,8 +20,7 @@ const MedicineData = ({setFetchedMedicineArray, handleSubmit, medicineArray, nam
         setDescription(description);
         setQuantity(quantity)
         setId(_id);
-        open();
-
+        openForUpdate();
    }
 
 const handleDelete = async () => {
@@ -37,10 +30,10 @@ const handleDelete = async () => {
   
     if (confirmDelete) {
       try {
-        const response = await axios.delete(`http://localhost:3001/medicine/${id}`);
+        const response = await axios.delete(`https://medico-backend.cyclic.app/medicine/${id}`);
         console.log(response.message);
         setFetchedMedicineArray(medicineArray);
-        close();
+        closeForUpdate();
       } catch (error) {
         console.error("error deleting medicine", error);
       }
@@ -63,10 +56,10 @@ const handleDelete = async () => {
                 </div>
             ))}
             </div>
-            {isOpen && (
+            {isOpenForUpdate && (
                 <div className="addMedicines" >
                 <div id="updateMedicine" className="addMedicines-Contents">
-                <span className="close" onClick={close}>&times;</span>
+                <span className="close" onClick={closeForUpdate}>&times;</span>
                     <form onSubmit={handleSubmit} className="flexbox inputForm">
                         <textarea value={name} onChange={(e)=>{setName(e.target.value)}} className="inputOfAddMedicine name" name="name" placeholder="Medicine" required />
                         <textarea value={description} onChange={(e)=>{setDescription(e.target.value)}} className="inputOfAddMedicine description" name="description" placeholder="Description" required/>

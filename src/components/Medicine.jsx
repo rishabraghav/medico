@@ -13,6 +13,14 @@ function Medicine() {
   const [quantity, setQuantity] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [fetchedMedicineArray, setFetchedMedicineArray] = useState([]);
+  const [isOpenForUpdate, setIsOpenForUpdate] = useState(false);
+
+  const openForUpdate = ()=> {
+    setIsOpenForUpdate(true);
+  }
+  const closeForUpdate = () => {
+    setIsOpenForUpdate(false);
+  }
 
   const open = () => {
       setIsOpen(true);
@@ -23,7 +31,7 @@ function Medicine() {
   useEffect(() => {
     const fetchMedicine = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/medicine');
+            const response = await axios.get('https://medico-backend.cyclic.app/medicine');
 
             const data = response.data
             // console.log(data);
@@ -34,7 +42,6 @@ function Medicine() {
         }
     };
     fetchMedicine();
-    // console.log("very first render");
 },[fetchedMedicineArray]);
 
 
@@ -48,7 +55,7 @@ const handleSubmit = (event) => {
   };
 
   axios
-    .post('http://localhost:3001/medicine/add', newMedicine)
+    .post('https://medico-backend.cyclic.app/medicine/add', newMedicine)
     .then((response) => {
       const updatedMedicineArray = medicineArray.map((medicine) => {
         // if (medicine._id === response.data._id) {
@@ -65,6 +72,7 @@ const handleSubmit = (event) => {
       console.error('Error adding/updating medicine:', error);
     });
     close();
+    closeForUpdate();
 };
 
 
@@ -72,7 +80,7 @@ return (
     <div className="App">
       <Header />
       <Inputs isOpen={isOpen} open={open} close={close} handleSubmit={handleSubmit} medicineArray={medicineArray} updateArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
-      <MedicineData setFetchedMedicineArray={setFetchedMedicineArray} handleSubmit={handleSubmit} medicineArray={medicineArray} updatedArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
+      <MedicineData isOpenForUpdate={isOpenForUpdate} setIsOpenForUpdate={setIsOpenForUpdate} openForUpdate={openForUpdate} closeForUpdate={closeForUpdate} setFetchedMedicineArray={setFetchedMedicineArray} handleSubmit={handleSubmit} medicineArray={medicineArray} updatedArray={setMedicineArray} name={name} setName={setName} description={description} setDescription={setDescription} quantity={quantity} setQuantity={setQuantity}/>
     </div>
   );
 }
