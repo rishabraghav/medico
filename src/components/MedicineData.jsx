@@ -30,7 +30,7 @@ const handleDelete = async () => {
   
     if (confirmDelete) {
       try {
-        const response = await axios.delete(`https://medico-backend.cyclic.app/medicine/${id}`);
+        const response = await axios.delete(`https://medico-backend-0d0d.onrender.com/medicine/${id}`);
         console.log(response.message);
         setFetchedMedicineArray(medicineArray);
         closeForUpdate();

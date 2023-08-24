@@ -31,7 +31,7 @@ function Medicine() {
   useEffect(() => {
     const fetchMedicine = async () => {
         try {
-            const response = await axios.get('https://medico-backend.cyclic.app/medicine');
+            const response = await axios.get('https://medico-backend-0d0d.onrender.com/medicine');
 
             const data = response.data
             // console.log(data);
@@ -55,7 +55,7 @@ const handleSubmit = (event) => {
   };
 
   axios
-    .post('https://medico-backend.cyclic.app/medicine/add', newMedicine)
+    .post('https://medico-backend-0d0d.onrender.com/medicine/add', newMedicine)
     .then((response) => {
       const updatedMedicineArray = medicineArray.map((medicine) => {
         // if (medicine._id === response.data._id) {
