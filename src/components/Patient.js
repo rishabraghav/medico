@@ -38,7 +38,7 @@ const Patient = () => {
     useEffect(() => {
         const fetchPatients = async() => {
             try{
-                const response = await axios.get("https://medico-backend.cyclic.app/patients");
+                const response = await axios.get("https://medico-backend-0d0d.onrender.com/patients");
                 console.log("Fetched Patients: ", response.data);
                 setPatientsArray(response.data);
             } catch(err) {
@@ -83,7 +83,7 @@ const Patient = () => {
                 setTempArray([...patientsArray, data]);
             }
             try {
-                const response = await axios.post("https://medico-backend.cyclic.app/patients/add", data);
+                const response = await axios.post("https://medico-backend-0d0d.onrender.com/patients/add", data);
                 console.log(response.data);
             } catch (err) {
                 console.error("error in making POST request: ", err);

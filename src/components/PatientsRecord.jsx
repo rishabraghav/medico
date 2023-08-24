@@ -15,7 +15,7 @@ function PatientsRecord({setTempArray ,patientsArray }) {
 
         if(confirm) {
             try {
-                const response = await axios.delete(`https://medico-backend.cyclic.app/patients/${id}`);
+                const response = await axios.delete(`https://medico-backend-0d0d.onrender.com/patients/${id}`);
                 console.log("Deleted Patient: ", response.data);
                 setTempArray(patientsArray);
             } catch (err) {
@@ -30,7 +30,7 @@ function PatientsRecord({setTempArray ,patientsArray }) {
 
         if(confirm) {
             try{
-                const response = await axios.delete(`https://medico-backend.cyclic.app/patients/${id}/${infoId}`);
+                const response = await axios.delete(`https://medico-backend-0d0d.onrender.com/patients/${id}/${infoId}`);
                 console.log("deleted patient's record: ", response.data);
                 setTempArray(patientsArray);
             } catch (err) {
